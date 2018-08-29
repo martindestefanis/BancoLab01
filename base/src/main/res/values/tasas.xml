@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="tasa">
+    <string-array name="tasa1">
                     <item>0.25</item>
                     <item>.275</item>
                     <item>.30</item>
