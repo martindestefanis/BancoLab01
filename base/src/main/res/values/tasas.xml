@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="tasa1">
-                    <item>0.25</item>
-                    <item>.275</item>
-                    <item>.30</item>
-                    <item>.323</item>
-                    <item>.35</item>
-                    <item>.385</item>
-
+        <item>"0.25"</item>
+        <item>"0.275"</item>
+        <item>"0.30"</item>
+        <item>"0.323"</item>
+        <item>"0.35"</item>
+        <item>"0.385"</item>
     </string-array>
 </resources>
