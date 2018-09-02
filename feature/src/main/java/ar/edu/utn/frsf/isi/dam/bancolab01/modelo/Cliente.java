@@ -2,14 +2,14 @@ package ar.edu.utn.frsf.isi.dam.bancolab01.modelo;
 
 public class Cliente {
     private String mail;
-    private String cuil;
+    private String cuit;
 
     public String getMail() {
         return mail;
     }
 
-    public String getCuil() {
-        return cuil;
+    public String getCuit() {
+        return cuit;
     }
 
     public void setMail(String mail) {
@@ -17,14 +17,14 @@ public class Cliente {
     }
 
     public void setCuil(String cuil) {
-        this.cuil = cuil;
+        this.cuit = cuil;
     }
 
     @Override
     public String toString() {
         return "Cliente{" +
                 "mail='" + mail + '\'' +
-                ", cuil='" + cuil + '\'' +
+                ", cuil='" + cuit + '\'' +
                 '}';
     }
 }

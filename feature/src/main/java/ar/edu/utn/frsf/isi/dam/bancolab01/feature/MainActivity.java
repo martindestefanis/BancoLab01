@@ -1,7 +1,9 @@
 package ar.edu.utn.frsf.isi.dam.bancolab01.feature;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
 
     private PlazoFijo pf;
     private Cliente cliente;
+    private EditText edtMail;
+    private EditText edtCuit;
     private EditText edtMonto;
     private Button btnHacerPlazoFijo;
     private SeekBar seekBar;
@@ -24,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     int progress = 10;
     private TextView tvInteres;
     private CheckBox chbAceptoTerminos;
+    private TextView tvMensajes;
 
 
     @Override
@@ -33,6 +38,10 @@ public class MainActivity extends AppCompatActivity {
 
         pf = new PlazoFijo(getResources().getStringArray(R.array.tasa1));
         cliente = new Cliente();
+        edtMail= (EditText) findViewById(R.id.edtMail);
+        cliente.setMail(edtMail.toString());
+        edtCuit= (EditText) findViewById(R.id.edtCuit);
+        cliente.setCuil(edtCuit.toString());
 
         edtMonto= (EditText) findViewById(R.id.edtMonto);
         String value = edtMonto.getText().toString();
@@ -52,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         tvInteres = (TextView) findViewById(R.id.tvInteres);
 
         chbAceptoTerminos = (CheckBox) findViewById(R.id.chbAceptoTerminos);
+
+        tvMensajes = (TextView) findViewById(R.id.tvMensajes);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -85,6 +96,25 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnHacerPlazoFijo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            if(cliente.getMail().trim().isEmpty() || cliente.getCuit().isEmpty() || pf.getMonto()<=0.0 || pf.getDias()<=10)
+                {
+                    Toast.makeText(getApplicationContext(),"Revise los datos ingresados", Toast.LENGTH_LONG).show();;
+                }
+            else {
+                tvMensajes.setText("El plazo fijo se realizó correctamente \n" +
+                                    "Datos del plazo fijo: \n" +
+                                    "Dias: " + pf.getDias() + "\n" +
+                                    "Monto: " + pf.getMonto() + "\n");
+                tvMensajes.setTextColor(Color.BLUE);
+                }
+            }
+        });
+
+        }
+
+
     }
 
-}
