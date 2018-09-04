@@ -1,8 +1,12 @@
 package ar.edu.utn.frsf.isi.dam.bancolab01.feature;
 
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -31,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvMensajes;
 
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +49,37 @@ public class MainActivity extends AppCompatActivity {
         cliente.setCuil(edtCuit.toString());
 
         edtMonto= (EditText) findViewById(R.id.edtMonto);
-        String value = edtMonto.getText().toString();
-        Double monto = Double.parseDouble(value);
-        pf.setMonto(monto);
+        edtMonto.addTextChangedListener(new TextWatcher(){
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(edtMonto.getText().toString().isEmpty()){
+                    pf.setMonto(0.0);
+                }else {
+                    String value = edtMonto.getText().toString();
+                    Double monto = Double.parseDouble(value);
+                    pf.setMonto(monto);
+                    tvInteres.setText("$" + pf.intereses().toString());
+                }
+            }
+        });
 
         btnHacerPlazoFijo = (Button) findViewById(R.id.btnHacerPlazoFijo);
         btnHacerPlazoFijo.setEnabled(false);
 
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setMax(180);
+        seekBar.setMin(10);
         seekBar.setProgress(progress);
 
         tvDiasSeleccionados = (TextView) findViewById(R.id.tvDiasSeleccionados);
@@ -108,14 +135,14 @@ public class MainActivity extends AppCompatActivity {
                 tvMensajes.setText("El plazo fijo se realizó correctamente \n" +
                                     "Datos del plazo fijo: \n" +
                                     "Dias: " + pf.getDias() + "\n" +
-                                    "Monto: " + pf.getMonto() + "\n");
+                                    "Monto: " + pf.getMonto() + "\n"+
+                                    "Intereses:" + pf.intereses() + "\n");
                 tvMensajes.setTextColor(Color.BLUE);
                 }
             }
         });
 
         }
-
 
     }
 
