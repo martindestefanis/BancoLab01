@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"Es obligatorio aceptar las condiciones",Toast.LENGTH_LONG).show();
+                    btnHacerPlazoFijo.setEnabled(false);
                 }
 
             }
