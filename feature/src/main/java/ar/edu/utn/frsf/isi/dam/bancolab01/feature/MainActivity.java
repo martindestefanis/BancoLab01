@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(edtMonto.getText().toString().isEmpty()){
                     pf.setMonto(0.0);
+                    tvInteres.setText("$0.0");
                 }
                 else {
                     String value = edtMonto.getText().toString();
@@ -92,11 +93,17 @@ public class MainActivity extends AppCompatActivity {
                 progress = i;
                 tvDiasSeleccionados.setText(progress + " dias de plazo");
                 pf.setDias(progress);
-                edtMonto= (EditText) findViewById(R.id.edtMonto);
-                String value = edtMonto.getText().toString();
-                Double monto = Double.parseDouble(value);
-                pf.setMonto(monto);
-                tvInteres.setText("$" + pf.intereses().toString());
+                if(edtMonto.getText().toString().isEmpty()){
+                    pf.setMonto(0.0);
+                    tvInteres.setText("$0.0");
+                }
+                else {
+                    String value = edtMonto.getText().toString();
+                    Double monto = Double.parseDouble(value);
+                    pf.setMonto(monto);
+                    pf.setDias(progress);
+                    tvInteres.setText("$" + pf.intereses().toString());
+                }
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }
