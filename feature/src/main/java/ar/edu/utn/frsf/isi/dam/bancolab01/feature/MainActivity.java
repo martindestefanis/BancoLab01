@@ -42,9 +42,7 @@ public class MainActivity extends AppCompatActivity {
         pf = new PlazoFijo(getResources().getStringArray(R.array.tasa1));
         cliente = new Cliente();
         edtMail = (EditText) findViewById(R.id.edtMail);
-        cliente.setMail(edtMail.toString());
         edtCuit = (EditText) findViewById(R.id.edtCuit);
-        cliente.setCuil(edtCuit.toString());
         edtMonto = (EditText) findViewById(R.id.edtMonto);
         edtMonto.addTextChangedListener(new TextWatcher(){
 
@@ -127,13 +125,15 @@ public class MainActivity extends AppCompatActivity {
         btnHacerPlazoFijo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            if(cliente.getMail().trim().isEmpty() || cliente.getCuit().isEmpty() || pf.getMonto()<=0.0 || pf.getDias()<=10)
+            if(cliente.getMail().toString().isEmpty() || cliente.getCuit().toString().isEmpty() || pf.getMonto()<=0.0 || pf.getDias()<=10)
                 {
                     Toast.makeText(getApplicationContext(),"Revise los datos ingresados", Toast.LENGTH_LONG).show();
                     tvMensajes.setText("Los datos ingresados son incorrectos o no son válidos");
                     tvMensajes.setTextColor(Color.RED);
                 }
             else {
+                cliente.setMail(edtMail.toString());
+                cliente.setCuil(edtCuit.toString());
                 tvMensajes.setText("El plazo fijo se realizó correctamente \n" +
                                     "Datos del plazo fijo:\n" +
                                     "Dias: " + pf.getDias() + "\n" +
