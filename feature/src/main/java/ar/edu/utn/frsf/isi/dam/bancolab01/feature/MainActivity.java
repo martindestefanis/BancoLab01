@@ -134,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
                     tvMensajes.setTextColor(Color.RED);
                 }
             else {
-                cliente.setMail(edtMail.toString());
-                cliente.setCuil(edtCuit.toString());
                 tvMensajes.setText("El plazo fijo se realizó correctamente \n" +
                                     "Datos del plazo fijo:\n" +
                                     "Dias: " + pf.getDias() + "\n" +
