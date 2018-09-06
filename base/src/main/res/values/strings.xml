@@ -8,11 +8,9 @@
     <string name="lblMonedaP">AR$</string>
     <string name="lblMonedaUSD">US$</string>
     <string name="lblRendimiento">Rendimiento</string>
-    <string name="lblInteres">Interés</string>
     <string name="lblavisar">Avisar por e-mail antes del vencimiento</string>
     <string name="btnPlazoFijo">HACER PLAZO FIJO</string>
     <string name="btnAcreditarOFF">ACREDITAR EN CUENTA</string>
     <string name="btnAcreditarON">RENOVAR PLAZO FIJO</string>
     <string name="lblcbx">Aceptar términos y condiciones</string>
-    <string name="lblResultados">resultados</string>
 </resources>
