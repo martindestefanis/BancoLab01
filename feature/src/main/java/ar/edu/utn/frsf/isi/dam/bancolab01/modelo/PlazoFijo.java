@@ -91,12 +91,7 @@ public class PlazoFijo {
     }
 
     public Double intereses(){
-
         return monto*(Math.pow(1+(tasa()/100.0),(dias)/360.0)-1);
     }
 
 }
-
-
-
-
