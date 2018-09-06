@@ -29,46 +29,41 @@ public class MainActivity extends AppCompatActivity {
     private Button btnHacerPlazoFijo;
     private SeekBar seekBar;
     private TextView tvDiasSeleccionados;
-    int progress = 10;
     private TextView tvInteres;
     private CheckBox chbAceptoTerminos;
     private TextView tvMensajes;
-
+    int progress = 10;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         pf = new PlazoFijo(getResources().getStringArray(R.array.tasa1));
         cliente = new Cliente();
-        edtMail= (EditText) findViewById(R.id.edtMail);
+        edtMail = (EditText) findViewById(R.id.edtMail);
         cliente.setMail(edtMail.toString());
-        edtCuit= (EditText) findViewById(R.id.edtCuit);
+        edtCuit = (EditText) findViewById(R.id.edtCuit);
         cliente.setCuil(edtCuit.toString());
-
-        edtMonto= (EditText) findViewById(R.id.edtMonto);
+        edtMonto = (EditText) findViewById(R.id.edtMonto);
         edtMonto.addTextChangedListener(new TextWatcher(){
 
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) { }
 
             @Override
             public void afterTextChanged(Editable s) {
                 if(edtMonto.getText().toString().isEmpty()){
                     pf.setMonto(0.0);
-                }else {
+                }
+                else {
                     String value = edtMonto.getText().toString();
                     Double monto = Double.parseDouble(value);
                     pf.setMonto(monto);
+                    pf.setDias(progress);
                     tvInteres.setText("$" + pf.intereses().toString());
                 }
             }
@@ -79,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setMax(180);
-        seekBar.setMin(10);
+        //seekBar.setMin(10);
         seekBar.setProgress(progress);
 
         tvDiasSeleccionados = (TextView) findViewById(R.id.tvDiasSeleccionados);
@@ -97,12 +92,11 @@ public class MainActivity extends AppCompatActivity {
                 progress = i;
                 tvDiasSeleccionados.setText(progress + " dias de plazo");
                 pf.setDias(progress);
-                pf.intereses();
                 edtMonto= (EditText) findViewById(R.id.edtMonto);
                 String value = edtMonto.getText().toString();
                 Double monto = Double.parseDouble(value);
                 pf.setMonto(monto);
-                tvInteres.setText("$"+pf.intereses().toString());
+                tvInteres.setText("$" + pf.intereses().toString());
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }
@@ -117,10 +111,9 @@ public class MainActivity extends AppCompatActivity {
                     btnHacerPlazoFijo.setEnabled(true);
                 }
                 else{
-                    Toast.makeText(getApplicationContext(),"Es obligatorio aceptar las condiciones",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Es obligatorio aceptar los términos y condiciones",Toast.LENGTH_LONG).show();
                     btnHacerPlazoFijo.setEnabled(false);
                 }
-
             }
         });
 
@@ -129,11 +122,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
             if(cliente.getMail().trim().isEmpty() || cliente.getCuit().isEmpty() || pf.getMonto()<=0.0 || pf.getDias()<=10)
                 {
-                    Toast.makeText(getApplicationContext(),"Revise los datos ingresados", Toast.LENGTH_LONG).show();;
+                    Toast.makeText(getApplicationContext(),"Revise los datos ingresados", Toast.LENGTH_LONG).show();
+                    tvMensajes.setText("Los datos ingresados son incorrectos o no son válidos");
+                    tvMensajes.setTextColor(Color.RED);
                 }
             else {
                 tvMensajes.setText("El plazo fijo se realizó correctamente \n" +
-                                    "Datos del plazo fijo: \n" +
+                                    "Datos del plazo fijo:\n" +
                                     "Dias: " + pf.getDias() + "\n" +
                                     "Monto: " + pf.getMonto() + "\n"+
                                     "Intereses:" + pf.intereses() + "\n");
@@ -141,8 +136,5 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
         }
-
     }
-
