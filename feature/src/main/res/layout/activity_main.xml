@@ -41,28 +41,20 @@
 
     <RadioGroup
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <LinearLayout
+        <RadioButton
+            android:id="@+id/rbUS"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:text="@string/lblMonedaUSD"/>
 
-            <RadioButton
-                android:id="@+id/rbUS"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lblMonedaUSD" />
-
-            <RadioButton
-                android:id="@+id/rbAR"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/lblMonedaP" />
-        </LinearLayout>
+        <RadioButton
+            android:id="@+id/rbAR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/lblMonedaP"/>
 
     </RadioGroup>
 
