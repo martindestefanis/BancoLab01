@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar seekBar;
     private TextView tvDiasSeleccionados, tvInteres, tvMensajes;
     private CheckBox chbAceptoTerminos;
-    int progress = 0;
+    int progress = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
